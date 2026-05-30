@@ -7,7 +7,7 @@ import com.gym.gateway.config.GatewayConfig;
 
 @SpringBootApplication
 @EnableConfigurationProperties(GatewayConfig.class)
-public class ApiGatewayApplication {
+public class ApiGatewayApplication { //a
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
