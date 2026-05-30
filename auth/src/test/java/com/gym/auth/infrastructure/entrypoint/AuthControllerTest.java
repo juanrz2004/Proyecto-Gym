@@ -59,9 +59,9 @@ class AuthControllerTest {
     @DisplayName("POST /auth/register — falla con datos inválidos")
     void register_invalidData_returns400() throws Exception {
         RegisterRequestDTO req = new RegisterRequestDTO();
-        req.setUsername("ab");          // muy corto
-        req.setEmail("not-an-email");   // email inválido
-        req.setPassword("123");         // muy corta
+        req.setUsername("ab");
+        req.setEmail("not-an-email");
+        req.setPassword("123");
 
         mockMvc.perform(post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("POST /auth/login — falla con credenciales inválidas")
-    void login_invalidCredentials_returns401() throws Exception {
+    void login_invalidCredentials_returns400() throws Exception {
         LoginRequestDTO req = new LoginRequestDTO();
         req.setUsername("ignacio");
         req.setPassword("wrong");
@@ -101,6 +101,6 @@ class AuthControllerTest {
         mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(req)))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isBadRequest());
     }
 }

@@ -1,0 +1,15 @@
+### 1. Login (obtener token)
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gym.com",
+  "password": "123456"
+}
+
+### 2. Sin token (debe dar 401)
+GET http://localhost:8080/api/members/members
+
+### 3. Listar miembros CON token
+GET http://localhost:8080/api/members/members
+Authorization: Bearer PEGA_TOKEN_AQUI

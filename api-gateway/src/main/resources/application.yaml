@@ -7,13 +7,13 @@ spring:
 
         # ── AUTH (público) ──────────────────────────────────────────────
         - id: auth-service
-          uri: ${AUTH_SERVICE_URL:http://auth:8086}
+          uri: ${AUTH_SERVICE_URL:http://localhost:8086}
           predicates:
             - Path=/auth/**
 
         # ── MEMBERS ────────────────────────────────────────────────────
         - id: members-service
-          uri: ${MEMBERS_SERVICE_URL:http://members:8081}
+          uri: ${MEMBERS_SERVICE_URL:http://localhost:8081}
           predicates:
             - Path=/api/members/**
           filters:
@@ -22,7 +22,7 @@ spring:
 
         # ── MEMBERSHIPS ────────────────────────────────────────────────
         - id: memberships-service
-          uri: ${MEMBERSHIPS_SERVICE_URL:http://memberships:8082}
+          uri: ${MEMBERSHIPS_SERVICE_URL:http://localhost:8082}
           predicates:
             - Path=/api/memberships/**
           filters:
@@ -31,7 +31,7 @@ spring:
 
         # ── TRAINERS ───────────────────────────────────────────────────
         - id: trainers-service
-          uri: ${TRAINERS_SERVICE_URL:http://trainers:8083}
+          uri: ${TRAINERS_SERVICE_URL:http://localhost:8083}
           predicates:
             - Path=/api/trainers/**
           filters:
@@ -40,7 +40,7 @@ spring:
 
         # ── CLASSES ────────────────────────────────────────────────────
         - id: classes-service
-          uri: ${CLASSES_SERVICE_URL:http://classes:8084}
+          uri: ${CLASSES_SERVICE_URL:http://localhost:8084}
           predicates:
             - Path=/api/classes/**
           filters:
@@ -49,7 +49,7 @@ spring:
 
         # ── ATTENDANCE ─────────────────────────────────────────────────
         - id: attendance-service
-          uri: ${ATTENDANCE_SERVICE_URL:http://attendance:8085}
+          uri: ${ATTENDANCE_SERVICE_URL:http://localhost:8085}
           predicates:
             - Path=/api/attendance/**
           filters:
@@ -58,7 +58,7 @@ spring:
 
         # ── NOTIFICATIONS ──────────────────────────────────────────────
         - id: notifications-service
-          uri: ${NOTIFICATIONS_SERVICE_URL:http://notifications:8087}
+          uri: ${NOTIFICATIONS_SERVICE_URL:http://localhost:8087}
           predicates:
             - Path=/api/notifications/**
           filters:
