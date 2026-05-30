@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: auth
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/gym_auth}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:1234}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+server:
+  port: 8086
+
+jwt:
+  secret: ${JWT_SECRET:4D6251655468576D5A7134743777217A25432A462D4A614E645267556B586E32}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

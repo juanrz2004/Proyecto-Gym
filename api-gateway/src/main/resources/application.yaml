@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+
+        # ── AUTH (público) ──────────────────────────────────────────────
+        - id: auth-service
+          uri: ${AUTH_SERVICE_URL:http://auth:8086}
+          predicates:
+            - Path=/auth/**
+
+        # ── MEMBERS ────────────────────────────────────────────────────
+        - id: members-service
+          uri: ${MEMBERS_SERVICE_URL:http://members:8081}
+          predicates:
+            - Path=/api/members/**
+          filters:
+            - RewritePath=/api/members/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+        # ── MEMBERSHIPS ────────────────────────────────────────────────
+        - id: memberships-service
+          uri: ${MEMBERSHIPS_SERVICE_URL:http://memberships:8082}
+          predicates:
+            - Path=/api/memberships/**
+          filters:
+            - RewritePath=/api/memberships/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+        # ── TRAINERS ───────────────────────────────────────────────────
+        - id: trainers-service
+          uri: ${TRAINERS_SERVICE_URL:http://trainers:8083}
+          predicates:
+            - Path=/api/trainers/**
+          filters:
+            - RewritePath=/api/trainers/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+        # ── CLASSES ────────────────────────────────────────────────────
+        - id: classes-service
+          uri: ${CLASSES_SERVICE_URL:http://classes:8084}
+          predicates:
+            - Path=/api/classes/**
+          filters:
+            - RewritePath=/api/classes/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+        # ── ATTENDANCE ─────────────────────────────────────────────────
+        - id: attendance-service
+          uri: ${ATTENDANCE_SERVICE_URL:http://attendance:8085}
+          predicates:
+            - Path=/api/attendance/**
+          filters:
+            - RewritePath=/api/attendance/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+        # ── NOTIFICATIONS ──────────────────────────────────────────────
+        - id: notifications-service
+          uri: ${NOTIFICATIONS_SERVICE_URL:http://notifications:8087}
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - RewritePath=/api/notifications/(?<segment>.*), /$\{segment}
+            - name: JwtAuthFilter
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:4D6251655468576D5A7134743777217A25432A462D4A614E645267556B586E32}
+
+gateway:
+  public-paths:
+    - /auth/login
+    - /auth/register
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
